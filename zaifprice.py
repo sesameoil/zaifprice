@@ -28,13 +28,16 @@ def main():
     while True:
 
         btc = requests.get('https://api.zaif.jp/api/1/last_price/btc_jpy').json()
-        eth = requests.get('https://api.zaif.jp/api/1/last_priece/eth_jpy').json()
+        eth = requests.get('https://api.zaif.jp/api/1/last_price/eth_jpy').json()
         xem = requests.get('https://api.zaif.jp/api/1/last_price/xem_jpy').json()
         mona = requests.get('https://api.zaif.jp/api/1/last_price/mona_jpy').json()
 
     
-        payload = {'message': "現在のBTCの価格は、" + str(btc['last_price']) + "円です。" }
-        headers = {'Authorization': 'Bearer ' + ACCESS_TOKEN}  
+        payload = {'message': "\n現在のBTCの価格は、" + str(btc['last_price']) + "円です。\n"\
+        + "現在のETHの価格は、" + str(eth['last_price']) + "円です。\n"\
+        + "現在のXEMの価格は、" + str(xem['last_price']) + "円です。\n"\
+        + "現在のmonaの価格は、" + str(mona['last_price']) + "円です。"}
+        headers = {'Authorization': 'Bearer ' + ACCESS_TOKEN}
     
         r = requests.post('https://notify-api.line.me/api/notify', data=payload, headers=headers)
     
