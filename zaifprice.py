@@ -2,6 +2,9 @@
 import requests,json
 from time import sleep
 
+ACCESS_TOKEN = ""   #トークンを入力
+line_notify_api = "https://notify-api.line.me/api/notify"
+
 while True:
 
     btc = requests.get('https://api.zaif.jp/api/1/last_price/btc_jpy').json()
@@ -9,8 +12,6 @@ while True:
     xem = requests.get('https://api.zaif.jp/api/1/last_price/xem_jpy').json()
     mona = requests.get('https://api.zaif.jp/api/1/last_price/mona_jpy').json()
 
-    ACCESS_TOKEN = ""   #トークンを入力
-    line_notify_api = "https://notify-api.line.me/api/notify"
     
     payload = {'message': "現在のBTCの価格は、" + str(btc['last_price']) + "円です。" }
     headers = {'Authorization': 'Bearer ' + ACCESS_TOKEN}  
