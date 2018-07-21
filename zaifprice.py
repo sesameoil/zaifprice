@@ -44,7 +44,7 @@ def main():
         try:
             r.raise_for_status()
         except:
-            print("エラーです！" + str(r))
+            print("line_notify_apiのエラーです！" + str(r))
         else:
             print("success!" + str(r))
 
