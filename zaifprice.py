@@ -4,15 +4,15 @@ from time import sleep
 
 while True:
 
-    btc = response = requests.get('https://api.zaif.jp/api/1/last_price/btc_jpy')
-    eth = response = requests.get('https://api.zaif.jp/api/1/last_priece/eth_jpy')
-    xem = response = requests.get('https://api.zaif.jp/api/1/last_price/xem_jpy')
-    mona = response = requests.get('https://api.zaif.jp/api/1/last_price/mona_jpy')
-    
+    btc = requests.get('https://api.zaif.jp/api/1/last_price/btc_jpy').json()
+    eth = requests.get('https://api.zaif.jp/api/1/last_priece/eth_jpy').json()
+    xem = requests.get('https://api.zaif.jp/api/1/last_price/xem_jpy').json()
+    mona = requests.get('https://api.zaif.jp/api/1/last_price/mona_jpy').json()
+
     ACCESS_TOKEN = ""   #トークンを入力
     line_notify_api = "https://notify-api.line.me/api/notify"
     
-    payload = {'message': btc.text}
+    payload = {'message': "現在のBTCの価格は、" + str(btc['last_price']) + "円です。" }
     headers = {'Authorization': 'Bearer ' + ACCESS_TOKEN}  
     
     r = requests.post('https://notify-api.line.me/api/notify', data=payload, headers=headers)
