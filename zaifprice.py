@@ -27,20 +27,49 @@ def main():
 
     while True:
 
-        btc = requests.get('https://api.zaif.jp/api/1/last_price/btc_jpy').json()
-        eth = requests.get('https://api.zaif.jp/api/1/last_price/eth_jpy').json()
-        xem = requests.get('https://api.zaif.jp/api/1/last_price/xem_jpy').json()
-        mona = requests.get('https://api.zaif.jp/api/1/last_price/mona_jpy').json()
+        try:
+            btc = requests.get('https://api.zaif.jp/api/1/last_price/btc_jpy').json()
+            btc.raise_for_status
+        except:
+            print( "価格取得エラー!再試行まで10秒")
+            sleep(10)
+            btc = requests.get('https://api.zaif.jp/api/1/last_price/btc_jpy').json()
+            btc.raise_for_status
+        try:
+            eth = requests.get('https://api.zaif.jp/api/1/last_price/eth_jpy').json()
+            eth.raise_for_status
+        except:
+            print( "価格取得エラー!再試行まで10秒")
+            sleep(10)
+            eth = requests.get('https://api.zaif.jp/api/1/last_price/eth_jpy').json()
+            eth.raise_for_status
+        try:
+            xem = requests.get('https://api.zaif.jp/api/1/last_price/xem_jpy').json()
+            xem.raise_for_status
+        except:
+            print( "価格取得エラー!再試行まで10秒")
+            sleep(10)
+            xem = requests.get('https://api.zaif.jp/api/1/last_price/xem_jpy').json()
+            xem.raise_for_status
+        try:
+            mona = requests.get('https://api.zaif.jp/api/1/last_price/mona_jpy').json()
+            mona.raise_for_status
+        except:
+            print( "価格取得エラー!再試行まで10秒")
+            sleep(10)
+            mona = requests.get('https://api.zaif.jp/api/1/last_price/mona_jpy').json()
+            mona.raise_for_status
 
-    
+
         payload = {'message': "\n現在のBTCの価格は、" + str(btc['last_price']) + "円です。\n"\
         + "現在のETHの価格は、" + str(eth['last_price']) + "円です。\n"\
         + "現在のXEMの価格は、" + str(xem['last_price']) + "円です。\n"\
         + "現在のmonaの価格は、" + str(mona['last_price']) + "円です。"}
+
         headers = {'Authorization': 'Bearer ' + ACCESS_TOKEN}
-    
+
         r = requests.post('https://notify-api.line.me/api/notify', data=payload, headers=headers)
-    
+
         try:
             r.raise_for_status()
         except:
