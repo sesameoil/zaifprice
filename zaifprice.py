@@ -68,10 +68,10 @@ def main():
             mona.raise_for_status
 
 
-        payload = {'message': "\n現在のBTCの価格は、" + str(btc_dict['last_price']) + "円です。\n"\
-        + "現在のETHの価格は、" + str(eth_dict['last_price']) + "円です。\n"\
-        + "現在のXEMの価格は、" + str(xem_dict['last_price']) + "円です。\n"\
-        + "現在のmonaの価格は、" + str(mona_dict['last_price']) + "円です。"}
+        payload = {'message': "\n現在のBTCの価格は、" + str(btc_dict['last_price']) + "　円です。\n"\
+        + "現在のETHの価格は、" + str(eth_dict['last_price']) + "　円です。\n"\
+        + "現在のXEMの価格は、" + str(xem_dict['last_price']) + "　円です。\n"\
+        + "現在のmonaの価格は、" + str(mona_dict['last_price']) + "　円です。"}
 
         headers = {'Authorization': 'Bearer ' + ACCESS_TOKEN}
 
